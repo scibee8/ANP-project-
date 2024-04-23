@@ -71,7 +71,7 @@ window.addEventListener('resize', adjustSliderWidth);
 
     // Initial adjustment on load
     adjustSliderWidth();
-});
+
 
 
 
