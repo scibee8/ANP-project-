@@ -5,19 +5,15 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR Heritage</title>
-    <script src='https://aframe.io/releases/0.9.2/aframe.min.js'></script>
-    <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-    <script>
-        THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/';
-    </script>
+    <script src='https://aframe.io/releases/1.2.0/aframe.min.js'></script> <!-- Updated A-Frame version -->
+    <script src="https://unpkg.com/@ar-js-org/ar.js@aframe@3.3.5/aframe-ar.js"></script> <!-- Updated AR.js version -->
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="slider-container">
             <label for="s_slide">Adjust Model Size:</label>
-            <input type="range" id="s_slide" min="0.01" max="0.1" value="0" step="0.01">
+            <input type="range" id="s_slide" min="0.01" max="0.1" value="0.1" step="0.01"> <!-- Default value adjusted -->
         </div>
 
         <div class="slider-container">
@@ -28,8 +24,6 @@
         <button><a href="about.html">About</a></button>
     </div>
 
-   
-    
     <a-scene
         vr-mode-ui="enabled: false"
         embedded
@@ -42,4 +36,5 @@
 
 </body>
 </html>
+
 
