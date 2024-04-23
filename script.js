@@ -1,33 +1,28 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const her_model = document.getElementById('h_model');
-    
-    if (her_model) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude;
-            var long = position.coords.longitude;
-            her_model.setAttribute('gps-entity-place', `latitude: ${lat}; longitude: ${long}`);
-        }, function(error) {
-            console.error('Geolocation error:', error);
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    alert("User denied the request for Geolocation.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    alert("Location information is unavailable.");
-                    break;
-                case error.TIMEOUT:
-                    alert("The request to get user location timed out.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    alert("An unknown error occurred.");
-                    break;
-            }
-        });
-    } else {
-        console.error('Element not found: h_model');
-    }
-});
+window.onload = () => {
+    let testEntityAdded = false;
 
+    const el = document.querySelector("[gps-new-camera]");
+
+    el.addEventListener("gps-camera-update-position", e => {
+        if(!testEntityAdded) {
+            alert(`Got first GPS position: lon ${e.detail.position.longitude} lat ${e.detail.position.latitude}`);
+            // Add a box to the north of the initial GPS position
+            const entity = document.createElement("a-box");
+            entity.setAttribute("scale", {
+                x: 20, 
+                y: 20,
+                z: 20
+            });
+            entity.setAttribute('material', { color: 'red' } );
+            entity.setAttribute('gps-new-entity-place', {
+                latitude: e.detail.position.latitude + 0.001,
+                longitude: e.detail.position.longitude
+            });
+            document.querySelector("a-scene").appendChild(entity);
+        }
+        testEntityAdded = true;
+    });
+};
 
 
 
