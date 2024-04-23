@@ -60,6 +60,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
+window.addEventListener('resize', adjustSliderWidth);
+
+    function adjustSliderWidth() {
+        var sliders = document.querySelectorAll('input[type="range"]');
+        sliders.forEach(function(slider) {
+            slider.style.width = window.innerWidth > 600 ? '100%' : '90%'; // Adjust based on the condition
+        });
+    }
+
+    // Initial adjustment on load
+    adjustSliderWidth();
+});
 
 
 
