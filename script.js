@@ -1,29 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
-
-    const her_model=document.getElementById('h_model');
-
+    const her_model = document.getElementById('h_model');
     
-    navigator.geolocation.getCurrentPosition(function(position) { 
-
-        var lat = position.coords.latitude;
-        var long = position.coords.longitude;
-        her_model.setAttribute('gps-entity-place',  `latitude: ${lat}; longitude: ${long}`);
-    });
-    
-    
+    if (her_model) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            her_model.setAttribute('gps-entity-place', `latitude: ${lat}; longitude: ${long}`);
+        }, function(error) {
+            console.error('Geolocation error:', error);
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        });
+    } else {
+        console.error('Element not found: h_model');
+    }
 });
 
-window.addEventListener('resize', adjustSliderWidth);
-
-    function adjustSliderWidth() {
-        var sliders = document.querySelectorAll('input[type="range"]');
-        sliders.forEach(function(slider) {
-            slider.style.width = window.innerWidth > 600 ? '100%' : '90%'; // Adjust based on the condition
-        });
-    }
-
-    // Initial adjustment on load
-    adjustSliderWidth();
 
 
 
